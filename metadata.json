@@ -101,5 +101,5 @@
   "source": "git@github.com:Pmovil/puppet-s3synced_file.git",
   "summary": "Mantain a mirrored file from S3 on filesystem",
   "tags": [],
-  "version": "0.1.0"
+  "version": "0.1.2"
 }
