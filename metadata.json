@@ -91,7 +91,7 @@
       ]
     }      
   ],
-  "project_page": "https://github.com/puppetlabs/puppetlabs-ntp",
+  "project_page": "https://github.com/Pmovil/puppet-s3synced_file",
   "requirements": [
    {
       "name": "puppet",
