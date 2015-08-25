@@ -16,11 +16,21 @@ Puppet::Type.type(:s3synced_file).provide(:posix) do
         region: @resource[:region]
       )
     
-      s3.get_object(
-        bucket: @resource[:bucket],
-        key:@resource[:key],
-        response_target: @resource[:name]
-      )
+      if File.exists?(@resource[:name])
+        s3.get_object(
+          bucket: @resource[:bucket],
+          key: @resource[:key],
+          if_modified_since: File.mtime(@resource[:name]),
+          response_target: @resource[:name]
+        )
+      else
+        s3.get_object(
+          bucket: @resource[:bucket],
+          key: @resource[:key],
+          response_target: @resource[:name]
+        )
+      end
+      
       
       # Make sure the mode is correct
       if @resource[:mode] != nil
@@ -42,8 +52,14 @@ Puppet::Type.type(:s3synced_file).provide(:posix) do
         end      
       end
       
-    rescue Aws::S3::Errors::ServiceError
-      self.fail "Could not download s3 file: #{context}"
+    rescue Aws::S3::Errors::ServiceError => e
+      if e.context.http_response.status_code == 304
+        info("Not modified on S3")
+      else
+        self.fail "Could not download s3 file. Status: #{e.context.http_response.status_code}"
+      end
+    rescue => e
+      self.fail "Could not download s3 file: #{e.message}"
     end
   end
   

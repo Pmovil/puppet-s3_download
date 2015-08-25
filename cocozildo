@@ -1,0 +1,148 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+return array(
+    'database' => array(
+        'params' => array(
+            'host' => 'futboleando-db-int',
+            'username' => 'futboleando',
+            'password' => '8uToGO5i',
+            'dbname' => 'trivia',
+            'driver_options' => array(
+                '1002' => "SET NAMES utf8"
+            ),
+            
+        )
+    ),
+    'database_read' => array(
+        'params' => array(
+            'host' => 'futboleando-db-read-int',
+            'username' => 'futboleando',
+            'password' => '8uToGO5i',
+            'dbname' => 'trivia',
+            'driver_options' => array(
+                '1002' => "SET NAMES utf8"
+            ),
+
+        )
+    ),
+    'database_tasks' => array(
+        'params' => array(
+            'host' => 'futboleando-db-tasks-int',
+            'username' => 'futboleando',
+            'password' => '8uToGO5i',
+            'dbname' => 'trivia',
+            'driver_options' => array(
+                '1002' => "SET NAMES utf8"
+            ),
+
+        )
+    ),
+    'log4php' =>
+    array(
+        'rootLogger' => array(
+            'appenders' => array('default'),
+            'level' => 'INFO'
+        ),
+        'appenders' => array(
+            'default' => array(
+                'class' => 'Pmovil2_Log4Php_Appenders_ArquivoPorDia',
+                'layout' => array(
+                    'class' => 'Pmovil2_Log4Php_Layouts_Pmovil'
+                ),
+                'params' => array(
+                    'file' => dirname($_SERVER['SCRIPT_FILENAME']) . '/../logs/%s',
+                    'datePattern' => 'Ymd'
+                )
+            )
+        )
+    ),
+    'mediaConverter' => array(
+        'backend' => array(
+            'tipo' => 'S3',
+            'opcoes' => array(
+                'Bucket' => 'futboleando',
+                'region' => 'us-west-1',
+                'key' => 'AKIAIVGDV6JW5YNN4PHQ',
+                'secret' => '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'
+            )
+        ),
+        'dirOriginais' => '/media/originais',
+        'dirContDin' => '/media/contdin',
+        'headersFixos' => array(
+            'Expires: '.gmdate("D, d M Y H:i:s", time() + 3600) . ' GMT',
+            'Pragma: cache',
+            'Cache-Control: max-age=3600'
+        )
+    ),    
+    'mediaConverterUrl' => 'http://media-converter.futboleando.srv.pmovil.net/',
+    'mediaConverterFrontEnd' => 'http://d2ftp6ivwgdd6d.cloudfront.net/',
+    'parse' => array(
+            'applicationid' => 'kw2FO4O5YWzmLprK7nYEWZXKIXsQjquQ4Mg7zqMk',
+            'restapikey' => 'ugZfZU8yfcROClFVQMlq7NKNtApsg0cZZtJOhKzS',
+            'masterkey' => 'dTHOy1vl1K0JC3TFDKV8GionHZy14XTh6ClCBiF3',
+	    'fireAndForget' => 'http://127.0.0.1:8080/parse'
+    ),
+
+    'smnp' => array(
+        'appid' => 'FUTBOLEANDO',
+        'parse' => array(
+            'channel_name' => 'parse_FUTBOLEANDO'
+        )
+    ),
+
+
+    'api' => array(
+        'schemaCacheTimeout' => 600
+    ),
+    'redis' => array(
+        'params' => array(
+            'host' => 'futboleando.r5m3b0.ng.0001.usw1.cache.amazonaws.com',
+            'port' => '6379'
+        )
+    ),
+    'redis_read' => array(
+        'params' => array(
+            'host' => 'futboleando-read.r5m3b0.0001.usw1.cache.amazonaws.com',
+            'port' => '6379'
+        )
+    ),
+   'rabbit' => array(
+        'host' => 'futboleando-rabbitmq-int',
+        'port' => '5672',
+        'username' => 'futboleando',
+        'password' => 'rabbitpass'
+    ),
+    'timezones' => array(
+        'ar' => 'America/Argentina/Buenos_Aires',
+        'bo' => 'America/La_Paz',
+        'br' => 'America/Sao_Paulo',
+        'cl' => 'America/Santiago',
+        'co' => 'America/Bogota',
+        'cr' => 'America/Costa_Rica',
+        'ec' => 'America/Guayaquil',
+        'es' => 'Europe/Madrid',
+        'gt' => 'America/Guatemala',
+        'hn' => 'America/Tegucigalpa',
+        'mx' => 'America/Mexico_City',
+        'ni' => 'America/Managua',
+        'pe' => 'America/Lima',
+        'pt' => 'Europe/Lisbon',
+        'py' => 'America/Asuncion',
+        'sv' => 'America/El_Salvador',
+        'uy' => 'America/Montevideo'
+    ),
+
+    'googleAnalytics' => array(
+        'trackingId' => 'UA-52709623-5',
+        'fireAndForget' => 'http://127.0.0.1:8080/ga',
+        'timingRate' => 0.1
+    )
+
+);
