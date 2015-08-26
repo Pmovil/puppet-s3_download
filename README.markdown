@@ -1,6 +1,6 @@
 ##Description
 
-This module contains a custom type that mantain an AWS S3 file synced with a true file on filesystem
+This module contains a custom type that mantain an true file on filesystem synced with a AWS S3 file
 
 ##Setup
 
@@ -36,8 +36,8 @@ s3synced_file{'/path/to/your/file.ext':
         bucket => 'your-bucket',
         key => 'your/path/in/s3/object.ext',
         ensure => present,
-        mode => 0644,
-        owner => 'user',
-        group => 'group'
+        mode => 0644, #optional
+        owner => 'user', #optional
+        group => 'group' #optional
 }
 ~~~
